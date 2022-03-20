@@ -1,0 +1,32 @@
+server:
+  port: 8080
+
+spring:
+  r2dbc:
+    url: r2dbc:postgresql://localhost:8081/store
+    username: postgres
+    password: postgres
+
+  data:
+    r2dbc:
+      repositories:
+        enabled: true
+  main:
+    allow-bean-definition-overriding: true
+
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: none
+    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+
+  liquibase:
+    change-log: db/changelog/main-changelog.yaml
+    url: jdbc:postgresql://localhost:8081/store
+    user: postgres
+    password: postgres
+
+
+logging:
+  level:
+    root: INFO

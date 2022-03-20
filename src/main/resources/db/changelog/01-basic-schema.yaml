@@ -1,0 +1,57 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: dolzhanskii
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: users
+            - tableExists:
+                tableName: goods
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: bigserial
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: users_pk
+              - column:
+                  name: login
+                  type: varchar
+                  constraints:
+                    nullable: false
+                    unique: true
+                    uniqueConstraintName: users_k1
+              - column:
+                  name: preferred_currency
+                  type: varchar
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: goods
+            columns:
+              - column:
+                  name: id
+                  type: bigserial
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: goods_pk
+              - column:
+                  name: name
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: price
+                  type: decimal(7,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: currency
+                  type: varchar
+                  constraints:
+                    nullable: false
